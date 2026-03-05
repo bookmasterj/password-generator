@@ -1,6 +1,6 @@
 import secrets
 import string
-from gen_check_connector import score_password, display_score
+from password_checker_connector import score_password, display_score
 
 # Character sets
 lowercase = string.ascii_lowercase
