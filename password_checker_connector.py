@@ -151,7 +151,7 @@ def score_password(pw: str):
 
     return score, strength, suggestions
 
-
+#Displays score
 def display_score(score: int) -> int:
     """
     Optional helper for UI display.
