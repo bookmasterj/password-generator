@@ -73,25 +73,20 @@ def passwordGen():
 
         if(exitCheck1 == True and exitCheck2 == True and exitCheck3 == True and exitCheck4 == True):
             break
-
-    #pw = ''.join(secrets.choice(chars_select) for _ in range(length))
-
-    print("Generated Password:", pw)
-
-    # Send password to checker
+    # Send password to checker (removed print("Generated Password:", pw))
     raw_score, strength, suggestions = score_password(pw)
 
     score_for_ui = display_score(raw_score)
 
-    if(score_for_ui <= 25):
+    if score_for_ui <= 25:
         password_label.config(background="red")
         calculate_button.config(background="red", activebackground="red", foreground='white')
         strength_label.config(text="WEAK")
-    elif(score_for_ui <= 50):
+    elif score_for_ui <= 50:
         password_label.config(background="orange")
         calculate_button.config(background="orange", activebackground="orange", foreground='white')
         strength_label.config(text="MEDIUM")
-    elif(score_for_ui <= 75):
+    elif score_for_ui <= 75:
         password_label.config(background="yellowgreen")
         calculate_button.config(background="yellowgreen", activebackground="yellowgreen", foreground='white')
         strength_label.config(text="GOOD")
@@ -102,7 +97,14 @@ def passwordGen():
 
     print("Score:", score_for_ui)
     print("Strength:", strength)
+
+    # Ensure no characters from 'pw' exist in the printed suggestions
+    safe_suggestions = [s for s in suggestions if pw not in s]
     print("Suggestions:")
+    print("".join(safe_suggestions))
+
+    password_displayed.set(pw)
+
     print("".join(suggestions))
 
     password_displayed.set(pw)
